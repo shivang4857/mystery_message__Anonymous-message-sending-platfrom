@@ -1,4 +1,4 @@
-import dbConnect from '@/app/lib/dbConnect';
+import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/app/model/User';
 import mongoose from 'mongoose';
 import { User } from 'next-auth';
