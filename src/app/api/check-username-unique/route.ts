@@ -1,7 +1,7 @@
-import dbConnect from '../../lib/dbConnect';
-import UserModel from '../model/User';
+import dbConnect from '@/lib/dbConnect';
+import UserModel from '../../model/User';
 import { z } from 'zod';
-import { usernameValidation } from '../schema/signUpSchema';
+import { usernameValidation } from '../../schema/signUpSchema';
 
 const UsernameQuerySchema = z.object({
   username: usernameValidation,
@@ -15,6 +15,8 @@ export async function GET(request: Request) {
     const queryParams = {
       username: searchParams.get('username'),
     };
+
+    console.log('Query Params:', queryParams);
 
     // Validate query parameters using Zod schema
     const result = UsernameQuerySchema.safeParse(queryParams);
@@ -40,6 +42,8 @@ export async function GET(request: Request) {
       username,
       isVerified: true,
     });
+
+    console.log('DB Query Result:', existingVerifiedUser);
 
     if (existingVerifiedUser) {
       return new Response(
